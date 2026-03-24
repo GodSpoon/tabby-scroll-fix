@@ -1,0 +1,22 @@
+{
+  "name": "tabby-scroll-fix",
+  "version": "1.0.0",
+  "description": "Strips \\x1b[3J (clear scrollback) escape sequences to prevent viewport jumping in Tabby",
+  "keywords": [
+    "tabby-plugin"
+  ],
+  "author": "blog",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "devDependencies": {
+    "tabby-core": "^1.0.156",
+    "tabby-terminal": "^1.0.156",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
