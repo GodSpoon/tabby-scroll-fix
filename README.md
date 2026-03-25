@@ -13,9 +13,7 @@ See [anthropics/claude-code#769](https://github.com/anthropics/claude-code/issue
 This plugin intercepts `frontend.write()` on every terminal tab and:
 
 1. **Strips `\x1b[3J`** — prevents viewport jumping to the top of scrollback
-2. **Strips `\x1b[2J`** — prevents full-screen flash/flicker
-3. **Debounces writes (16ms)** — coalesces the clear + redraw into a single atomic write to xterm.js, eliminating visual jerk
-4. **Appends `\x1b[J`** after stripped screen clears — cleans up stale lines below the new content
+2. **Replaces `\x1b[2J` with `\x1b[H\x1b[J`** — clears the screen in-place (cursor home + erase below) instead of pushing content into scrollback, which eliminates the viewport jump and flicker
 
 ## Install
 
