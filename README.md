@@ -15,9 +15,20 @@ This plugin intercepts `frontend.write()` on every terminal tab and:
 1. **Strips `\x1b[3J`** — prevents viewport jumping to the top of scrollback
 2. **Replaces `\x1b[2J` with `\x1b[H\x1b[J`** — clears the screen in-place (cursor home + erase below) instead of pushing content into scrollback, which eliminates the viewport jump and flicker
 
-## Install
+## Install (one-liner)
 
-### Build
+```bash
+curl -fsSL https://raw.githubusercontent.com/GodSpoon/tabby-scroll-fix/add-install-script/install.sh | bash
+```
+
+This downloads and runs the install script which auto-detects your OS, builds the plugin, and installs it to the correct Tabby plugins directory.
+
+> **Note:** This one-liner links to a fork. Once the install script is merged into the upstream repo, update the URL to:
+> `https://raw.githubusercontent.com/a-rank/tabby-scroll-fix/master/install.sh`
+
+---
+
+## Install (manual)
 
 ```bash
 cd tabby-scroll-fix
