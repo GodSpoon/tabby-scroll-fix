@@ -47,7 +47,23 @@ fi
 # Install into Tabby plugins directory
 echo "Installing into $PLUGIN_DIR..."
 cd "$PLUGIN_DIR"
-npm install "$SOURCE_PATH" --legacy-peer-deps
+
+# Windows: use tarball to avoid symlink issues
+case "$(uname -s)" in
+  MINGW*|CYGWIN*|MSYS*)
+    TARBALL="$SOURCE_PATH/tabby-scroll-fix.tgz"
+    echo "Packaging tarball for Windows..."
+    cd "$SOURCE_PATH"
+    npm pack --silent
+    mv tabby-scroll-fix-*.tgz "$TARBALL" 2>/dev/null || mv tabby-scroll-fix.tgz "$TARBALL" 2>/dev/null || true
+    cd "$PLUGIN_DIR"
+    npm install "$TARBALL" --legacy-peer-deps
+    rm -f "$TARBALL"
+    ;;
+  *)
+    npm install "$SOURCE_PATH" --legacy-peer-deps
+    ;;
+esac
 
 echo ""
 echo "Done! Restart Tabby, then enable the plugin under Settings > Plugins."
